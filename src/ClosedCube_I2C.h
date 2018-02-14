@@ -56,6 +56,7 @@ namespace ClosedCube
 
 		public:
 
+			I2CDevice();
 			I2CDevice(uint8_t address);
 
 			byte readByte();
@@ -79,7 +80,7 @@ namespace ClosedCube
 			void writeByteToReg(uint8_t reg, byte value);
 			void writeWordToReg(uint8_t reg, short value);
 			
-
+			void address(uint8_t address) { _address = address;  }
 			uint8_t lastErrorCode();
 
 		private:

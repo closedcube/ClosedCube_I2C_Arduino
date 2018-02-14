@@ -37,6 +37,12 @@ ClosedCube::Driver::I2CDevice::I2CDevice(uint8_t address) : _address(address)
 
 }
 
+ClosedCube::Driver::I2CDevice::I2CDevice()
+{
+	
+}
+
+
 
 byte ClosedCube::Driver::I2CDevice::readByteFromReg(uint8_t reg) {
 	return readByteFromReg(reg, CC_I2C_RW_DELAY_MS);

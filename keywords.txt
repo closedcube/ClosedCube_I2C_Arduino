@@ -1,0 +1,34 @@
+##################################################################
+# Syntax Coloring Map For
+# ClosedCube I2C-driver wrapper
+##################################################################
+
+##################################################################
+# Datatypes (KEYWORD1)
+##################################################################
+
+ClosedCube	KEYWORD1
+Driver	KEYWORD1
+I2CDevice	KEYWORD1
+
+
+##################################################################
+# Methods and Functions (KEYWORD2)
+##################################################################
+
+readBye	KEYWORD2
+readWord	KEYWORD2
+readBytes	KEYWORD2
+readInt	KEYWORD2
+writeByte	KEYWORD2
+writeByte	KEYWORD2
+writeWord	KEYWORD2
+writeWord	KEYWORD2
+writeInt	KEYWORD2
+readByteFromReg	KEYWORD2
+readWordFromReg	KEYWORD2
+writeByteToReg	KEYWORD2
+writeWordToReg	KEYWORD2
+lastErrorCode	KEYWORD2
+
+

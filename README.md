@@ -1,7 +1,7 @@
 ClosedCube I2C-driver library for Arduino
 =================================================================
 
-This is a wrapper library for Arduino <code>Wire.h</code> APIs and exponses standard I2C methods to simplfy implementation I2C sensors and devices.
+This is a wrapper library for Arduino <code>Wire.h</code> APIs and exposes standard I2C methods to simplfy implementation I2C sensors and devices.
 
 The following ClosedCube sensors use this library:
 

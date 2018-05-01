@@ -5,16 +5,7 @@ This is a wrapper library for Arduino <code>Wire.h</code> APIs and exposes stand
 
 The following ClosedCube sensors use this library:
 
-<<<<<<< HEAD
 | Product ID  | Description | GitHub Repo   | 
 | ------------| ----------- | ------------- |
 | B019_TMP116 | TMP116 ±0.2°C (max) High-Accuracy Low Power Temperature Sensor Breakout Board  | [ClosedCube_TMP116_Arduino](https://github.com/closedcube/ClosedCube_TMP116_Arduino) |
 | B030_SGP30  | SGP30 Multi-Pixel TVOC/CO2 Gas Sensor | [ClosedCube_SGP30_Arduino](https://github.com/closedcube/ClosedCube_SGP30_Arduino)
-=======
-
-| Product ID            | Description   | GitHub Repo |
-| ----------------------| ------------- | ----------- |
-| B019_TMP116     | TMP116 ±0.2°C (max) High-Accuracy Low Power Temperature Sensor Breakout Board  | [ClosedCube_TMP116_Arduino](https://github.com/closedcube/ClosedCube_TMP116_Arduino) |
-| B030_SGP30 | SGP30 Multi-Pixel TVOC/CO2 Gas Sensor | [ClosedCube_SGP30_Arduino](https://github.com/closedcube/ClosedCube_SGP30_Arduino)
-
->>>>>>> origin/master

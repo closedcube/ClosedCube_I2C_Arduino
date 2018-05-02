@@ -199,12 +199,21 @@ void ClosedCube::Driver::I2CDevice::writeInt(int value, bool stop) {
     Wire.write((value >> 16) & 0xFF);
     Wire.write((value >> 8) & 0xFF);
     Wire.write((value) & 0xFF);
-    _errorCode = Wire.endTransmission();
+    _errorCode = Wire.endTransmission(stop);
 #else
     _errorCode = CC_I2C_NOT_DEFINED_ERROR;
 #endif
 }
 
+void ClosedCube::Driver::I2CDevice::readBytes(char *buf, uint8_t size) {
+    readBytes(buf,size,true);
+}
+
+void ClosedCube::Driver::I2CDevice::readBytes(char *buf, uint8_t size, bool stop) {
+    Wire.beginTransmission(_address);
+    Wire.readBytes(buf,size);
+    Wire.endTransmission(stop);
+}
 
 void ClosedCube::Driver::I2CDevice::clearError() {
     _errorCode = CC_I2C_OK;

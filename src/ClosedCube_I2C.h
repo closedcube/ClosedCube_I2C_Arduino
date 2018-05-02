@@ -31,12 +31,10 @@
 
 #if defined(ARDUINO) && ARDUINO >= 100
 
-
 #include "Arduino.h"
 #include <Wire.h>
 
 #define CC_ARDUINO 1
-
 #else
 #include "WProgram.h"
 #endif
@@ -65,6 +63,8 @@ namespace ClosedCube {
             int readInt();
 
             void readBytes(char *buf, uint8_t size);
+
+            void readBytes(char *buf, uint8_t size, bool stop);
 
             void writeByte(byte value);
 

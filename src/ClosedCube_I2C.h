@@ -36,12 +36,15 @@
 
 #define CC_ARDUINO 1
 #else
+
 #include "WProgram.h"
+
 #endif
 
 
 #define CC_I2C_RW_DELAY_MS 5
 #define CC_I2C_ERROR_NOT_DEFINED 0xFF
+#define CC_I2C_CRC_ERROR 0xF0
 #define CC_I2C_ERROR_REQ_INCORRECT 0xA0
 #define CC_I2C_OK 0x00
 

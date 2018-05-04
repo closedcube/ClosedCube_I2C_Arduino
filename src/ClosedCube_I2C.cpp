@@ -206,12 +206,12 @@ void ClosedCube::Driver::I2CDevice::writeInt(int value, bool stop) {
 }
 
 void ClosedCube::Driver::I2CDevice::readBytes(char *buf, uint8_t size) {
-    readBytes(buf,size,true);
+    readBytes(buf, size, true);
 }
 
 void ClosedCube::Driver::I2CDevice::readBytes(char *buf, uint8_t size, bool stop) {
     Wire.beginTransmission(_address);
-    Wire.readBytes(buf,size);
+    Wire.readBytes(buf, size);
     Wire.endTransmission(stop);
 }
 

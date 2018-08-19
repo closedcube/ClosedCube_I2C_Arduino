@@ -36,12 +36,19 @@ ClosedCube::Driver::I2CDevice::I2CDevice() {
 
 }
 
+void ClosedCube::Driver::I2CDevice::init() {
+#if defined(CC_ARDUINO)
+    Wire.begin();
+#else
+    _errorCode = CC_I2C_NOT_DEFINED_ERROR;
+#endif
+}
 
-byte ClosedCube::Driver::I2CDevice::readByteFromReg(uint8_t reg) {
+int8_t ClosedCube::Driver::I2CDevice::readByteFromReg(uint8_t reg) {
     return readByteFromReg(reg, CC_I2C_RW_DELAY_MS);
 }
 
-byte ClosedCube::Driver::I2CDevice::readByteFromReg(uint8_t reg, uint8_t delay_ms) {
+int8_t ClosedCube::Driver::I2CDevice::readByteFromReg(uint8_t reg, uint8_t delay_ms) {
     clearError();
 
     writeByte(reg, false);
@@ -50,7 +57,7 @@ byte ClosedCube::Driver::I2CDevice::readByteFromReg(uint8_t reg, uint8_t delay_m
     return readByte();
 }
 
-void ClosedCube::Driver::I2CDevice::writeByteToReg(uint8_t reg, byte value) {
+void ClosedCube::Driver::I2CDevice::writeByteToReg(uint8_t reg, int8_t value) {
     clearError();
 
 #if defined(CC_ARDUINO)
@@ -63,11 +70,11 @@ void ClosedCube::Driver::I2CDevice::writeByteToReg(uint8_t reg, byte value) {
 #endif
 }
 
-short ClosedCube::Driver::I2CDevice::readWordFromReg(uint8_t reg) {
+int16_t ClosedCube::Driver::I2CDevice::readWordFromReg(uint8_t reg) {
     return readWordFromReg(reg, CC_I2C_RW_DELAY_MS);
 }
 
-short ClosedCube::Driver::I2CDevice::readWordFromReg(uint8_t reg, uint8_t delay_ms) {
+int16_t ClosedCube::Driver::I2CDevice::readWordFromReg(uint8_t reg, uint8_t delay_ms) {
     clearError();
 
     writeByte(reg, false);
@@ -76,7 +83,7 @@ short ClosedCube::Driver::I2CDevice::readWordFromReg(uint8_t reg, uint8_t delay_
     return readWord();
 }
 
-void ClosedCube::Driver::I2CDevice::writeWordToReg(uint8_t reg, short value) {
+void ClosedCube::Driver::I2CDevice::writeWordToReg(uint8_t reg, int16_t value) {
     clearError();
 
 #if defined(CC_ARDUINO)
@@ -95,10 +102,10 @@ uint8_t ClosedCube::Driver::I2CDevice::lastErrorCode() {
     return _errorCode;
 }
 
-byte ClosedCube::Driver::I2CDevice::readByte() {
+int8_t ClosedCube::Driver::I2CDevice::readByte() {
     clearError();
 
-    byte result = 0x00;
+    int8_t result = 0x00;
 
 #if defined(CC_ARDUINO)
     int n = Wire.requestFrom(_address, (uint8_t) 1);
@@ -113,7 +120,7 @@ byte ClosedCube::Driver::I2CDevice::readByte() {
     return result;
 }
 
-short ClosedCube::Driver::I2CDevice::readWord() {
+int16_t ClosedCube::Driver::I2CDevice::readWord() {
     clearError();
 
     byte msb = 0x00;
@@ -132,11 +139,11 @@ short ClosedCube::Driver::I2CDevice::readWord() {
     _errorCode = CC_I2C_NOT_DEFINED_ERROR;
 #endif
 
-    return msb << 8 | (lsb & 0xFF);
+    return (int16_t)(msb << 8 | (lsb & 0xFF));
 }
 
 
-int ClosedCube::Driver::I2CDevice::readInt() {
+int32_t ClosedCube::Driver::I2CDevice::readInt() {
     clearError();
 
     char buf[4];
@@ -155,11 +162,11 @@ int ClosedCube::Driver::I2CDevice::readInt() {
 }
 
 
-void ClosedCube::Driver::I2CDevice::writeByte(byte value) {
+void ClosedCube::Driver::I2CDevice::writeByte(int8_t value) {
     writeByte(value, true);
 }
 
-void ClosedCube::Driver::I2CDevice::writeByte(byte value, bool stop) {
+void ClosedCube::Driver::I2CDevice::writeByte(int8_t value, bool stop) {
     clearError();
 
 #if defined(CC_ARDUINO)
@@ -171,11 +178,11 @@ void ClosedCube::Driver::I2CDevice::writeByte(byte value, bool stop) {
 #endif
 }
 
-void ClosedCube::Driver::I2CDevice::writeWord(short value) {
+void ClosedCube::Driver::I2CDevice::writeWord(int16_t value) {
     writeWord(value, true);
 }
 
-void ClosedCube::Driver::I2CDevice::writeWord(short value, bool stop) {
+void ClosedCube::Driver::I2CDevice::writeWord(int16_t value, bool stop) {
     clearError();
 #if defined(CC_ARDUINO)
     Wire.beginTransmission(_address);
@@ -187,11 +194,11 @@ void ClosedCube::Driver::I2CDevice::writeWord(short value, bool stop) {
 #endif
 }
 
-void ClosedCube::Driver::I2CDevice::writeInt(int value) {
+void ClosedCube::Driver::I2CDevice::writeInt(int32_t value) {
     writeInt(value, true);
 }
 
-void ClosedCube::Driver::I2CDevice::writeInt(int value, bool stop) {
+void ClosedCube::Driver::I2CDevice::writeInt(int32_t value, bool stop) {
     clearError();
 #if defined(CC_ARDUINO)
     Wire.beginTransmission(_address);

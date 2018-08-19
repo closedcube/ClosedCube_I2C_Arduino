@@ -26,21 +26,14 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _CLOSEDCUBE_I2C_h
-#define _CLOSEDCUBE_I2C_h
-
-#if defined(ARDUINO) && ARDUINO >= 100
-
-#include "Arduino.h"
-#include <Wire.h>
+#ifndef _CLOSEDCUBE_I2C_H
+#define _CLOSEDCUBE_I2C_H
 
 #define CC_ARDUINO 1
+    #include "Arduino.h"
+    #include <Wire.h>
 #else
-
-#include "WProgram.h"
-
 #endif
-
 
 #define CC_I2C_RW_DELAY_MS 5
 #define CC_I2C_ERROR_NOT_DEFINED 0xFF
@@ -59,39 +52,41 @@ namespace ClosedCube {
 
             I2CDevice(uint8_t address);
 
-            byte readByte();
+            void init();
 
-            short readWord();
+            int8_t readByte();
 
-            int readInt();
+            int16_t readWord();
+
+            int32_t readInt();
 
             void readBytes(char *buf, uint8_t size);
 
             void readBytes(char *buf, uint8_t size, bool stop);
 
-            void writeByte(byte value);
+            void writeByte(int8_t value);
 
-            void writeByte(byte value, bool stop);
+            void writeByte(int8_t value, bool stop);
 
-            void writeWord(short value);
+            void writeWord(int16_t value);
 
-            void writeWord(short value, bool stop);
+            void writeWord(int16_t value, bool stop);
 
-            void writeInt(int value);
+            void writeInt(int32_t value);
 
-            void writeInt(int value, bool stop);
+            void writeInt(int32_t value, bool stop);
 
-            byte readByteFromReg(uint8_t reg, byte delay_ms);
+            int8_t readByteFromReg(uint8_t reg, byte delay_ms);
 
-            byte readByteFromReg(uint8_t reg);
+            int8_t readByteFromReg(uint8_t reg);
 
-            short readWordFromReg(uint8_t reg, byte delay_ms);
+            int16_t readWordFromReg(uint8_t reg, byte delay_ms);
 
-            short readWordFromReg(uint8_t reg);
+            int16_t readWordFromReg(uint8_t reg);
 
-            void writeByteToReg(uint8_t reg, byte value);
+            void writeByteToReg(uint8_t reg, int8_t value);
 
-            void writeWordToReg(uint8_t reg, short value);
+            void writeWordToReg(uint8_t reg, int16_t value);
 
             void address(uint8_t address) { _address = address; }
 
@@ -108,5 +103,4 @@ namespace ClosedCube {
     };
 };
 
-#endif
 

@@ -146,7 +146,7 @@ int16_t ClosedCube::Driver::I2CDevice::readWord() {
 int32_t ClosedCube::Driver::I2CDevice::readInt() {
     clearError();
 
-    char buf[4];
+    byte buf[4];
 
 #if defined(CC_ARDUINO)
     int n = Wire.requestFrom(_address, (uint8_t) 4);
@@ -212,11 +212,11 @@ void ClosedCube::Driver::I2CDevice::writeInt(int32_t value, bool stop) {
 #endif
 }
 
-void ClosedCube::Driver::I2CDevice::readBytes(char *buf, uint8_t size) {
+void ClosedCube::Driver::I2CDevice::readBytes(byte *buf, uint8_t size) {
     readBytes(buf, size, true);
 }
 
-void ClosedCube::Driver::I2CDevice::readBytes(char *buf, uint8_t size, bool stop) {
+void ClosedCube::Driver::I2CDevice::readBytes(byte *buf, uint8_t size, bool stop) {
     Wire.beginTransmission(_address);
     Wire.readBytes(buf, size);
     Wire.endTransmission(stop);

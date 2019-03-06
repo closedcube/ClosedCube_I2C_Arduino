@@ -220,7 +220,7 @@ void ClosedCube::Driver::I2CDevice::writeInt(int32_t value, bool stop) {
 }
 
 void ClosedCube::Driver::I2CDevice::readBytes(byte *buf, uint8_t size) {
-    Wire.requestFrom(buf,size);
+    Wire.requestFrom(_address,size);
     Wire.readBytes(buf, size);
 }
 

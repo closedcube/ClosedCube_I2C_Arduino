@@ -44,7 +44,7 @@ ClosedCube::Driver::I2CDevice i2c;
 
 void setup() {
     Serial.begin(9600);
-    Serial.println("ClosedCube I2C Driver example");
+    Serial.println("ClosedCube I2C Driver Demo");
 
     i2c.init();
 

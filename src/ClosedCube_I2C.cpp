@@ -220,14 +220,10 @@ void ClosedCube::Driver::I2CDevice::writeInt(int32_t value, bool stop) {
 }
 
 void ClosedCube::Driver::I2CDevice::readBytes(byte *buf, uint8_t size) {
-    readBytes(buf, size, true);
+    Wire.requestFrom(buf,size);
+    Wire.readBytes(buf, size);
 }
 
-void ClosedCube::Driver::I2CDevice::readBytes(byte *buf, uint8_t size, bool stop) {
-    Wire.beginTransmission(_address);
-    Wire.readBytes(buf, size);
-    Wire.endTransmission(stop);
-}
 
 void ClosedCube::Driver::I2CDevice::clearError() {
     _errorCode = CC_I2C_OK;

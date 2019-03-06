@@ -72,8 +72,6 @@ namespace ClosedCube {
 
             void readBytes(byte *buf, uint8_t size);
 
-            void readBytes(byte *buf, uint8_t size, bool stop);
-
             void writeByte(int8_t value);
 
             void writeByte(int8_t value, bool stop);

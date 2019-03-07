@@ -11,4 +11,4 @@ The following ClosedCube sensors use this library:
 | B022_STS35  | STS35 ±0.1C High-Accuracy Digital Temperature Sensor | [ClosedCube_STS35_Arduino](https://github.com/closedcube/ClosedCube_STS35_Arduino)
 | B030_SGP30  | SGP30 Multi-Pixel TVOC/CO2 Gas Sensor | [ClosedCube_SGP30_Arduino](https://github.com/closedcube/ClosedCube_SGP30_Arduino)
 
-Updated: Thursday, 07 March 2019 at 23:11:07 GMT-00:00
+Updated: Thursday, 07 March 2019 at 23:14:26 GMT-00:00

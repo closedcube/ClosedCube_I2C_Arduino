@@ -1,7 +1,7 @@
 /*
 
 Arduino library for ClosedCube I2C Driver wrapper
-version 2019.03.07
+version 2019.3.7
 
 ---
 

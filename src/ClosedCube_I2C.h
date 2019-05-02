@@ -1,7 +1,7 @@
 /*
 
 Arduino library for ClosedCube I2C Driver wrapper
-version 2019.3.27
+version 2019.5.2
 
 ---
 
@@ -45,6 +45,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #else
 #endif
 
+#define CC_I2C_DRIVER_VERSION 0x1012
 #define CC_I2C_RW_DELAY_MS 5
 #define CC_I2C_ERROR_NOT_DEFINED 0xFF
 #define CC_I2C_CRC_ERROR 0xF0
@@ -99,6 +100,8 @@ namespace ClosedCube {
             void address(uint8_t address) { _address = address; }
 
             uint8_t lastErrorCode();
+
+            void printI2CSettings();
 
         private:
 

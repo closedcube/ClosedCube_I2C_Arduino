@@ -1,7 +1,7 @@
 /*
 
 Arduino library for ClosedCube I2C Driver wrapper
-version 2019.3.27
+version 2019.5.2
 
 ---
 
@@ -50,6 +50,16 @@ void ClosedCube::Driver::I2CDevice::init() {
 #else
     _errorCode = CC_I2C_NOT_DEFINED_ERROR;
 #endif
+}
+
+void ClosedCube::Driver::I2CDevice::printI2CSettings() {
+    Serial.print("ClosedCube I2C driver - Version:0x");
+    Serial.print(CC_I2C_DRIVER_VERSION, HEX);
+    Serial.print(" Pins:(SDA=");
+    Serial.print(SDA);
+    Serial.print(", SCL=");
+    Serial.print(SCL);
+    Serial.println(")");
 }
 
 int8_t ClosedCube::Driver::I2CDevice::readByteFromReg(uint8_t reg) {

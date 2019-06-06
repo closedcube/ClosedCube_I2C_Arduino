@@ -59,7 +59,9 @@ namespace ClosedCube {
 
         public:
 
-            I2CDevice();
+            #if defined(CC_ARDUINO)
+            I2CDevice(TwoWire *wire = &Wire);
+            #endif
 
             I2CDevice(uint8_t address);
 
@@ -107,6 +109,11 @@ namespace ClosedCube {
 
             uint8_t _address;
             uint8_t _errorCode;
+
+            #if defined(CC_ARDUINO)
+            TwoWire *_wire;
+            #endif
+            
 
             void clearError();
         };

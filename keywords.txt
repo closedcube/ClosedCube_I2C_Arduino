@@ -1,6 +1,6 @@
 ##################################################################
 # Syntax Coloring Map For
-# ClosedCube I2C Driver wrapper
+# ClosedCube I2C Driver (Wrapper)
 ##################################################################
 
 ##################################################################
@@ -33,4 +33,4 @@ lastErrorCode	KEYWORD2
 
 
 
-### Updated: Thursday, 06 June 2019 at 15:08:46 GMT-00:00
+### Updated: Thursday, 06 June 2019 at 15:17:11 GMT-00:00

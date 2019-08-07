@@ -174,11 +174,12 @@ int32_t ClosedCube::Driver::I2CDevice::readInt() {
     } else {
         _errorCode = CC_I2C_ERROR_REQ_INCORRECT;
     }
+
+    return buf[0] << 24 | (buf[1] & 0xFF) << 16 | (buf[2] & 0xFF) << 8 | (buf[3] & 0xFF);
 #else
     _errorCode = CC_I2C_NOT_DEFINED_ERROR;
 #endif
 
-    return buf[0] << 24 | (buf[1] & 0xFF) << 16 | (buf[2] & 0xFF) << 8 | (buf[3] & 0xFF);
 }
 
 void ClosedCube::Driver::I2CDevice::writeByte(int8_t value) {

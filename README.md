@@ -11,7 +11,7 @@ The following ClosedCube sensors use this library:
 | B022_STS35  | STS35 ±0.1C High-Accuracy Digital Temperature Sensor | [ClosedCube_STS35_Arduino](https://github.com/closedcube/ClosedCube_STS35_Arduino)
 | B023_HDC2080  | HDC2080 Low Power Humidity and Temperature Digital Sensor  | [ClosedCube_HDC2080_Arduino](https://github.com/closedcube/ClosedCube_HDC2080_Arduino)
 | B030_SGP30  | SGP30 Multi-Pixel TVOC/CO2 Gas Sensor | [ClosedCube_SGP30_Arduino](https://github.com/closedcube/ClosedCube_SGP30_Arduino)
-| B031_ZMOD4410 | ZMOD4410 TVOC and Indoor Air Quality Gas Sensor | [ClosedCube_ZMOD4410](https://github.com/closedcube/ClosedCube_ZMOD4410_Arduino))
+| B031_ZMOD4410 | ZMOD4410 TVOC and Indoor Air Quality Gas Sensor | [ClosedCube_ZMOD4410](https://github.com/closedcube/ClosedCube_ZMOD4410_Arduino)
 
 
-Updated: Wednesday, 07 August 2019 at 09:21:36 GMT-00:00
+Updated: Wednesday, 07 August 2019 at 09:56:47 GMT-00:00

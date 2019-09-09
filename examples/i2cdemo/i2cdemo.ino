@@ -3,7 +3,7 @@
 Example: i2cdemo
 
 Arduino library for ClosedCube I2C Driver (Wrapper)
-version 2019.8.8
+version 2019.9.9
 
 ---
 
@@ -49,11 +49,11 @@ void setup() {
     i2c.init();
     i2c.printI2CSettings();
 
-    Serial.print("Set I2C address 0x40...");
+    Serial.print("Setting I2C address 0x40...");
     i2c.address(0x40);
     printErrorCode(i2c.lastErrorCode());
 
-    Serial.print("Writing 0xFC and 0xC9...");
+    Serial.print("Writing 0xFCC9...");
     i2c.writeWord(0xFCC9);
     printErrorCode(i2c.lastErrorCode());
 

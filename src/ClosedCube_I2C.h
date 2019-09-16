@@ -1,7 +1,7 @@
 /*
 
 Arduino library for ClosedCube I2C Driver (Wrapper)
-version 2019.9.9
+version 2019.9.16
 
 ---
 
@@ -74,6 +74,10 @@ namespace ClosedCube {
             int32_t readInt();
 
             void readBytes(byte *buf, uint8_t size);
+
+            void writeBytes(byte *buf, uint8_t size);
+
+            void writeBytes(byte *buf, uint8_t size, bool stop);
 
             void writeByte(int8_t value);
 

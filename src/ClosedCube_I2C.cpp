@@ -1,7 +1,7 @@
 /*
 
 Arduino library for ClosedCube I2C Driver (Wrapper)
-version 2019.9.9
+version 2019.9.16
 
 ---
 
@@ -239,6 +239,23 @@ void ClosedCube::Driver::I2CDevice::readBytes(byte *buf, uint8_t size) {
 #else
     _errorCode = CC_I2C_NOT_DEFINED_ERROR;
 #endif    
+}
+
+void ClosedCube::Driver::I2CDevice::writeBytes(byte *buf, uint8_t size, bool stop) {
+#if defined(CC_ARDUINO)
+    _wire->beginTransmission(_address);
+    uint8_t i = 0;
+    for( i=0; i<size; i++ ) {
+        _wire->write(buf[i]);
+    }
+    _errorCode = _wire->endTransmission(stop);
+#else
+    _errorCode = CC_I2C_NOT_DEFINED_ERROR;
+#endif   
+}
+
+void ClosedCube::Driver::I2CDevice::writeBytes(byte *buf, uint8_t size) {
+    writeBytes(buf,size,true);
 }
 
 void ClosedCube::Driver::I2CDevice::clearError() {

@@ -20,6 +20,7 @@ readBye	KEYWORD2
 readWord	KEYWORD2
 readBytes	KEYWORD2
 readInt	KEYWORD2
+writeBytes	KEYWORD2
 writeByte	KEYWORD2
 writeByte	KEYWORD2
 writeWord	KEYWORD2
@@ -33,4 +34,4 @@ lastErrorCode	KEYWORD2
 
 
 
-### Updated: Monday, 16 September 2019 at 20:06:36 GMT-00:00
+### Updated: Monday, 16 September 2019 at 20:12:03 GMT-00:00

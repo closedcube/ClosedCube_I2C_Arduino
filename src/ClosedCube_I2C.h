@@ -39,10 +39,10 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef _CLOSEDCUBE_I2C_H
 #define _CLOSEDCUBE_I2C_H
 
-#define CC_ARDUINO 1
+#ifndef CC_ARDUINO
+    #define CC_ARDUINO 1
     #include "Arduino.h"
     #include <Wire.h>
-#else
 #endif
 
 #define CC_I2C_DRIVER_VERSION 0x1012
@@ -116,8 +116,7 @@ namespace ClosedCube {
 
             #if defined(CC_ARDUINO)
             TwoWire *_wire;
-            #endif
-            
+            #endif            
 
             void clearError();
         };
@@ -125,4 +124,4 @@ namespace ClosedCube {
     };
 };
 
-
+#endif

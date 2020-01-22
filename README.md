@@ -14,4 +14,4 @@ The following ClosedCube sensors use this library:
 | B031_ZMOD4410 | ZMOD4410 TVOC and Indoor Air Quality Gas Sensor | [ClosedCube_ZMOD4410](https://github.com/closedcube/ClosedCube_ZMOD4410_Arduino)
 
 
-Updated: Tuesday, 21 January 2020 at 23:10:31 GMT-00:00
+Updated: Wednesday, 22 January 2020 at 10:55:26 GMT-00:00

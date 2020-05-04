@@ -7,11 +7,13 @@ The following ClosedCube sensors use this library:
 
 | Product ID  | Description | GitHub Repo   | 
 | ------------| ----------- | ------------- |
+| B004_HDC1080|  | [ClosedCube_HDC1080_Arduino](https://github.com/closedcube/ClosedCube_HDC1080_Arduino)
 | B019_TMP116 | TMP116 ±0.2°C (max) High-Accuracy Low Power Temperature Sensor Breakout Board  | [ClosedCube_TMP116_Arduino](https://github.com/closedcube/ClosedCube_TMP116_Arduino) |
 | B022_STS35  | STS35 ±0.1C High-Accuracy Digital Temperature Sensor | [ClosedCube_STS35_Arduino](https://github.com/closedcube/ClosedCube_STS35_Arduino)
 | B023_HDC2080  | HDC2080 Low Power Humidity and Temperature Digital Sensor  | [ClosedCube_HDC2080_Arduino](https://github.com/closedcube/ClosedCube_HDC2080_Arduino)
+| B026_SHTC3  | SHTC3 Humidity and Temperature Sensor | [ClosedCube_SHTC3_Arduino](https://github.com/closedcube/ClosedCube_SHTC3_Arduino)
 | B030_SGP30  | SGP30 Multi-Pixel TVOC/CO2 Gas Sensor | [ClosedCube_SGP30_Arduino](https://github.com/closedcube/ClosedCube_SGP30_Arduino)
 | B031_ZMOD4410 | ZMOD4410 TVOC and Indoor Air Quality Gas Sensor | [ClosedCube_ZMOD4410](https://github.com/closedcube/ClosedCube_ZMOD4410_Arduino)
 
 
-Updated: Monday, 04 May 2020 at 20:59:17 GMT-00:00
+Updated: Monday, 04 May 2020 at 21:01:51 GMT-00:00

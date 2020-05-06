@@ -16,4 +16,4 @@ The following ClosedCube sensors use this library:
 | B366_TCA9548A | B366_TCA9548A 8-Channel I2C Switch with 1.8V (Buck) and 5V (Boost) | [ClosedCube_TCA9548A](https://github.com/closedcube/ClosedCube_TCA9548A_Arduino)
 
 
-Updated: Wednesday, 06 May 2020 at 21:22:26 GMT-00:00
+Updated: Wednesday, 06 May 2020 at 21:23:55 GMT-00:00

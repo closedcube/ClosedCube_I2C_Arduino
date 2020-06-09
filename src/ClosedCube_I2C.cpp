@@ -230,15 +230,15 @@ void ClosedCube::Driver::I2CDevice::writeInt(uint32_t value, bool stop)
 }
           
             
-void ClosedCube::Driver::I2CDevice::writeRegS8(uint8_t reg, int8_t value) {
+void ClosedCube::Driver::I2CDevice::writeS8ToReg(uint8_t reg, int8_t value) {
     writeByteToReg(reg,value);
 }
 
-int8_t ClosedCube::Driver::I2CDevice::readRegS8(uint8_t reg) {
+int8_t ClosedCube::Driver::I2CDevice::readS8FromReg(uint8_t reg) {
     return (int8_t)readByteFromReg(reg);
 }
 
-int8_t ClosedCube::Driver::I2CDevice::readRegS8(uint8_t reg, uint16_t delay_ms) {
+int8_t ClosedCube::Driver::I2CDevice::readS8FromReg(uint8_t reg, uint16_t delay_ms) {
     return (int8_t)readByteFromReg(reg,delay_ms);
 }
 

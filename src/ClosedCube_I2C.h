@@ -98,9 +98,9 @@ namespace ClosedCube
             void writeWordToReg(uint8_t reg, uint16_t value);
 
 
-            int8_t readRegS8(uint8_t reg, uint16_t delay_ms);
-            int8_t readRegS8(uint8_t reg);
-            void writeRegS8(uint8_t reg, int8_t value);
+            int8_t readS8FromReg(uint8_t reg, uint16_t delay_ms);
+            int8_t readS8FromReg(uint8_t reg);
+            void writeS8ToReg(uint8_t reg, int8_t value);
 
             /*
             uint16_t readRegU16(uint8_t reg, uint16_t delay_ms);

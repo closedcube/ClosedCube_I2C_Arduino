@@ -1,7 +1,7 @@
 /*
 
 Arduino library for ClosedCube I2C Driver (Wrapper)
-version 2020.6.3
+version 2020.6.9
 
 ---
 
@@ -46,7 +46,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 #define CC_I2C_DRIVER_VERSION 0x1012
-#define CC_I2C_RW_DELAY_MS 5
+#define CC_I2C_RW_DELAY_MS 1
 #define CC_I2C_ERROR_NOT_DEFINED 0xFF
 #define CC_I2C_CRC_ERROR 0xF0
 #define CC_I2C_ERROR_REQ_INCORRECT 0xA0
@@ -54,77 +54,77 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 namespace ClosedCube
 {
-namespace Driver
-{
+    namespace Driver
+    {
 
-class I2CDevice
-{
+        class I2CDevice
+        {
 
-public:
+        public:
 #if defined(CC_ARDUINO)
-    I2CDevice(TwoWire *wire = &Wire);
+            I2CDevice(TwoWire *wire = &Wire);
 #endif
 
-    I2CDevice(uint8_t address);
+            I2CDevice(uint8_t address);
 
-    void init();
+            void init();
 
-    int8_t readByte();
+            uint8_t readByte();
+            uint16_t readWord();
+            uint32_t readInt();
 
-    int16_t readWord();
+            int8_t readS8();
+            int16_t readS16();
+            int32_t readS32();
 
-    int32_t readInt();
+            void readBytes(byte *buf, uint8_t size);
+            void readBytes(byte *buf, uint8_t size, bool stop);
+            void writeBytes(byte *buf, uint8_t size);
+            void writeBytes(byte *buf, uint8_t size, bool stop);
 
-    void readBytes(byte *buf, uint8_t size);
+            void writeByte(uint8_t value);
+            void writeByte(uint8_t value, bool stop);
+            void writeWord(uint16_t value);
+            void writeWord(uint16_t value, bool stop);
+            void writeInt(uint32_t value);
+            void writeInt(uint32_t value, bool stop);
 
-    void readBytes(byte *buf, uint8_t size, bool stop);
+            uint8_t readByteFromReg(uint8_t reg, uint16_t delay_ms);
+            uint8_t readByteFromReg(uint8_t reg);
+            uint16_t readWordFromReg(uint8_t reg, uint16_t delay_ms);
+            uint16_t readWordFromReg(uint8_t reg);
 
-    void writeBytes(byte *buf, uint8_t size);
+            void writeByteToReg(uint8_t reg, uint8_t value);
+            void writeWordToReg(uint8_t reg, uint16_t value);
 
-    void writeBytes(byte *buf, uint8_t size, bool stop);
+            /*
+            uint8_t readRegU8(uint8_t reg, uint16_t delay_ms);
+            uint8_t readRegU8(uint8_t reg);
+            uint16_t readRegU16(uint8_t reg, uint16_t delay_ms);
+            uint16_t readRegU16(uint8_t reg);
 
-    void writeByte(int8_t value);
+            void writeRegU8(uint8_t reg, uint8_t value);
+            void writeRegU16(uint8_t reg, uint16_t value);
+            */
 
-    void writeByte(int8_t value, bool stop);
+            void address(uint8_t address) { _address = address; }
 
-    void writeWord(int16_t value);
+            uint8_t lastErrorCode();
 
-    void writeWord(int16_t value, bool stop);
+            void printI2CSettings();
 
-    void writeInt(int32_t value);
-
-    void writeInt(int32_t value, bool stop);
-
-    int8_t readByteFromReg(uint8_t reg, byte delay_ms);
-
-    int8_t readByteFromReg(uint8_t reg);
-
-    int16_t readWordFromReg(uint8_t reg, byte delay_ms);
-
-    int16_t readWordFromReg(uint8_t reg);
-
-    void writeByteToReg(uint8_t reg, int8_t value);
-
-    void writeWordToReg(uint8_t reg, int16_t value);
-
-    void address(uint8_t address) { _address = address; }
-
-    uint8_t lastErrorCode();
-
-    void printI2CSettings();
-
-private:
-    uint8_t _address;
-    uint8_t _errorCode;
+        private:
+            uint8_t _address;
+            uint8_t _errorCode;
 
 #if defined(CC_ARDUINO)
-    TwoWire *_wire;
+            TwoWire *_wire;
 #endif
 
-    void clearError();
-};
+            void clearError();
+        };
 
-}; // namespace Driver
-}; // namespace ClosedCube
+    }; // namespace Driver
+};     // namespace ClosedCube
 
 #endif

@@ -3,7 +3,7 @@
 Example: i2cdemo
 
 Arduino library for ClosedCube I2C Driver (Wrapper)
-version 2020.6.3
+version 2020.6.9
 
 ---
 
@@ -57,6 +57,7 @@ void setup() {
     i2c.writeWord(0xFCC9);
     printErrorCode(i2c.lastErrorCode());
 
+    
     Serial.print("Reading a byte... 0x");
     Serial.print(i2c.readByte(),HEX);
     printErrorCode(i2c.lastErrorCode());

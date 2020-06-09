@@ -1,7 +1,7 @@
 /*
 
 Arduino library for ClosedCube I2C Driver (Wrapper)
-version 2020.6.3
+version 2020.6.9
 
 ---
 
@@ -50,16 +50,11 @@ ClosedCube::Driver::I2CDevice::I2CDevice(uint8_t address) : _address(address)
 
 void ClosedCube::Driver::I2CDevice::init()
 {
-#if defined(CC_ARDUINO)
     _wire->begin();
-#else
-    _errorCode = CC_I2C_NOT_DEFINED_ERROR;
-#endif
 }
 
 void ClosedCube::Driver::I2CDevice::printI2CSettings()
 {
-#if defined(CC_ARDUINO)
     Serial.print("ClosedCube I2C driver - Version:0x");
     Serial.print(CC_I2C_DRIVER_VERSION, HEX);
     Serial.print(" Pins:(SDA=");
@@ -67,15 +62,14 @@ void ClosedCube::Driver::I2CDevice::printI2CSettings()
     Serial.print(", SCL=");
     Serial.print(SCL);
     Serial.println(")");
-#endif
 }
 
-int8_t ClosedCube::Driver::I2CDevice::readByteFromReg(uint8_t reg)
+uint8_t ClosedCube::Driver::I2CDevice::readByteFromReg(uint8_t reg)
 {
     return readByteFromReg(reg, CC_I2C_RW_DELAY_MS);
 }
 
-int8_t ClosedCube::Driver::I2CDevice::readByteFromReg(uint8_t reg, uint8_t delay_ms)
+uint8_t ClosedCube::Driver::I2CDevice::readByteFromReg(uint8_t reg, uint16_t delay_ms)
 {
     clearError();
     writeByte(reg, false);
@@ -86,26 +80,22 @@ int8_t ClosedCube::Driver::I2CDevice::readByteFromReg(uint8_t reg, uint8_t delay
     return readByte();
 }
 
-void ClosedCube::Driver::I2CDevice::writeByteToReg(uint8_t reg, int8_t value)
+void ClosedCube::Driver::I2CDevice::writeByteToReg(uint8_t reg, uint8_t value)
 {
     clearError();
 
-#if defined(CC_ARDUINO)
     _wire->beginTransmission(_address);
     _wire->write(reg);
     _wire->write(value);
     _errorCode = _wire->endTransmission();
-#else
-    _errorCode = CC_I2C_NOT_DEFINED_ERROR;
-#endif
 }
 
-int16_t ClosedCube::Driver::I2CDevice::readWordFromReg(uint8_t reg)
+uint16_t ClosedCube::Driver::I2CDevice::readWordFromReg(uint8_t reg)
 {
     return readWordFromReg(reg, CC_I2C_RW_DELAY_MS);
 }
 
-int16_t ClosedCube::Driver::I2CDevice::readWordFromReg(uint8_t reg, uint8_t delay_ms)
+uint16_t ClosedCube::Driver::I2CDevice::readWordFromReg(uint8_t reg, uint16_t delay_ms)
 {
     clearError();
     writeByte(reg, false);
@@ -116,7 +106,7 @@ int16_t ClosedCube::Driver::I2CDevice::readWordFromReg(uint8_t reg, uint8_t dela
     return readWord();
 }
 
-void ClosedCube::Driver::I2CDevice::writeWordToReg(uint8_t reg, int16_t value)
+void ClosedCube::Driver::I2CDevice::writeWordToReg(uint8_t reg, uint16_t value)
 {
     clearError();
 
@@ -136,15 +126,15 @@ uint8_t ClosedCube::Driver::I2CDevice::lastErrorCode()
     return _errorCode;
 }
 
-int8_t ClosedCube::Driver::I2CDevice::readByte()
+uint8_t ClosedCube::Driver::I2CDevice::readByte()
 {
     clearError();
 
-    int8_t result = 0x00;
+    uint8_t result;
 
-#if defined(CC_ARDUINO)
-    int n = _wire->requestFrom(_address, (uint8_t)1);
-    if (n == 1)
+    _wire->requestFrom(_address, (uint8_t)1);
+    
+    if (_wire->available())
     {
         result = _wire->read();
     }
@@ -152,23 +142,18 @@ int8_t ClosedCube::Driver::I2CDevice::readByte()
     {
         _errorCode = CC_I2C_ERROR_REQ_INCORRECT;
     }
-#else
-    _errorCode = CC_I2C_NOT_DEFINED_ERROR;
-#endif
 
     return result;
 }
 
-int16_t ClosedCube::Driver::I2CDevice::readWord()
+uint16_t ClosedCube::Driver::I2CDevice::readWord()
 {
     clearError();
 
-    byte msb = 0x00;
-    byte lsb = 0x00;
+    uint8_t msb, lsb;
 
-#if defined(CC_ARDUINO)
-    int n = _wire->requestFrom(_address, (uint8_t)2);
-    if (n == 2)
+    _wire->requestFrom(_address, (uint8_t)2);
+    if( _wire->available())
     {
         msb = _wire->read();
         lsb = _wire->read();
@@ -178,111 +163,85 @@ int16_t ClosedCube::Driver::I2CDevice::readWord()
         _errorCode = CC_I2C_ERROR_REQ_INCORRECT;
     }
 
-#else
-    _errorCode = CC_I2C_NOT_DEFINED_ERROR;
-#endif
-
-    return (int16_t)(msb << 8 | (lsb & 0xFF));
+    return (uint16_t)(msb << 8 | (lsb & 0xFF));
 }
 
-int32_t ClosedCube::Driver::I2CDevice::readInt()
+uint32_t ClosedCube::Driver::I2CDevice::readInt()
 {
     clearError();
 
-    byte buf[4];
+    uint8_t buf[4];
 
-#if defined(CC_ARDUINO)
-    int n = _wire->requestFrom(_address, (uint8_t)4);
-    if (n == 4)
+    uint8_t len = (uint8_t)4;
+    _wire->requestFrom(_address, len);
+    if( _wire->available())
     {
-        _wire->readBytes(buf, 4);
+        _wire->readBytes(buf, len);
     }
     else
     {
         _errorCode = CC_I2C_ERROR_REQ_INCORRECT;
     }
 
-    return (int32_t)buf[0] << 24 | ((int32_t)buf[1] & 0xFF) << 16 | (buf[2] & 0xFF) << 8 | (buf[3] & 0xFF);
-#else
-    _errorCode = CC_I2C_NOT_DEFINED_ERROR;
-#endif
+    return (uint32_t)buf[0] << 24 | ((uint32_t)buf[1] & 0xFF) << 16 | (buf[2] & 0xFF) << 8 | (buf[3] & 0xFF);
 }
 
-void ClosedCube::Driver::I2CDevice::writeByte(int8_t value)
+void ClosedCube::Driver::I2CDevice::writeByte(uint8_t value)
 {
     writeByte(value, true);
 }
 
-void ClosedCube::Driver::I2CDevice::writeByte(int8_t value, bool stop)
+void ClosedCube::Driver::I2CDevice::writeByte(uint8_t value, bool stop)
 {
     clearError();
-
-#if defined(CC_ARDUINO)
     _wire->beginTransmission(_address);
     _wire->write(value);
     _errorCode = _wire->endTransmission(stop);
-#else
-    _errorCode = CC_I2C_NOT_DEFINED_ERROR;
-#endif
 }
 
-void ClosedCube::Driver::I2CDevice::writeWord(int16_t value)
+void ClosedCube::Driver::I2CDevice::writeWord(uint16_t value)
 {
     writeWord(value, true);
 }
 
-void ClosedCube::Driver::I2CDevice::writeWord(int16_t value, bool stop)
+void ClosedCube::Driver::I2CDevice::writeWord(uint16_t value, bool stop)
 {
     clearError();
-
-#if defined(CC_ARDUINO)
     _wire->beginTransmission(_address);
     _wire->write((value >> 8) & 0xFF);
-    _wire->write((value)&0xFF);
+    _wire->write((value) & 0xFF);
     _errorCode = _wire->endTransmission(stop);
-#else
-    _errorCode = CC_I2C_NOT_DEFINED_ERROR;
-#endif
 }
 
-void ClosedCube::Driver::I2CDevice::writeInt(int32_t value)
+void ClosedCube::Driver::I2CDevice::writeInt(uint32_t value)
 {
     writeInt(value, true);
 }
 
-void ClosedCube::Driver::I2CDevice::writeInt(int32_t value, bool stop)
+void ClosedCube::Driver::I2CDevice::writeInt(uint32_t value, bool stop)
 {
     clearError();
-
-#if defined(CC_ARDUINO)
     _wire->beginTransmission(_address);
     _wire->write((value >> 24) & 0xFF);
     _wire->write((value >> 16) & 0xFF);
     _wire->write((value >> 8) & 0xFF);
     _wire->write((value)&0xFF);
     _errorCode = _wire->endTransmission(stop);
-#else
-    _errorCode = CC_I2C_NOT_DEFINED_ERROR;
-#endif
 }
 
-void ClosedCube::Driver::I2CDevice::readBytes(byte *buf, uint8_t size) {
-    readBytes(buf,size,true);
+void ClosedCube::Driver::I2CDevice::readBytes(byte *buf, uint8_t size)
+{
+    readBytes(buf, size, true);
 }
 
 void ClosedCube::Driver::I2CDevice::readBytes(byte *buf, uint8_t size, bool stop)
 {
-#if defined(CC_ARDUINO)
     _wire->requestFrom(_address, size, stop);
     _wire->readBytes(buf, size);
-#else
-    _errorCode = CC_I2C_NOT_DEFINED_ERROR;
-#endif
 }
 
 void ClosedCube::Driver::I2CDevice::writeBytes(byte *buf, uint8_t size, bool stop)
 {
-#if defined(CC_ARDUINO)
     _wire->beginTransmission(_address);
     uint8_t i = 0;
     for (i = 0; i < size; i++)
@@ -290,9 +249,6 @@ void ClosedCube::Driver::I2CDevice::writeBytes(byte *buf, uint8_t size, bool sto
         _wire->write(buf[i]);
     }
     _errorCode = _wire->endTransmission(stop);
-#else
-    _errorCode = CC_I2C_NOT_DEFINED_ERROR;
-#endif
 }
 
 void ClosedCube::Driver::I2CDevice::writeBytes(byte *buf, uint8_t size)

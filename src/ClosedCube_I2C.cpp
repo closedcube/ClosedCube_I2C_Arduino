@@ -228,6 +228,19 @@ void ClosedCube::Driver::I2CDevice::writeInt(uint32_t value, bool stop)
     _wire->write((value)&0xFF);
     _errorCode = _wire->endTransmission(stop);
 }
+          
+            
+void ClosedCube::Driver::I2CDevice::writeRegS8(uint8_t reg, int8_t value) {
+    writeByteToReg(reg,value);
+}
+
+int8_t ClosedCube::Driver::I2CDevice::readRegS8(uint8_t reg) {
+    return (int8_t)readByteFromReg(reg);
+}
+
+int8_t ClosedCube::Driver::I2CDevice::readRegS8(uint8_t reg, uint16_t delay_ms) {
+    return (int8_t)readByteFromReg(reg,delay_ms);
+}
 
 void ClosedCube::Driver::I2CDevice::readBytes(byte *buf, uint8_t size)
 {

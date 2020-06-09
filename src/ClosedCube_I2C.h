@@ -97,14 +97,15 @@ namespace ClosedCube
             void writeByteToReg(uint8_t reg, uint8_t value);
             void writeWordToReg(uint8_t reg, uint16_t value);
 
+
+            int8_t readRegS8(uint8_t reg, uint16_t delay_ms);
+            int8_t readRegS8(uint8_t reg);
+            void writeRegS8(uint8_t reg, int8_t value);
+
             /*
-            uint8_t readRegU8(uint8_t reg, uint16_t delay_ms);
-            uint8_t readRegU8(uint8_t reg);
             uint16_t readRegU16(uint8_t reg, uint16_t delay_ms);
             uint16_t readRegU16(uint8_t reg);
 
-            void writeRegU8(uint8_t reg, uint8_t value);
-            void writeRegU16(uint8_t reg, uint16_t value);
             */
 
             void address(uint8_t address) { _address = address; }

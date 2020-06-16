@@ -3,7 +3,7 @@
 Example: i2cdemo
 
 Arduino library for ClosedCube I2C Driver (Wrapper)
-version 2020.6.15
+version 2020.6.16
 
 ---
 
